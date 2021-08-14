@@ -4,13 +4,23 @@
 // that code so it'll be compiled.
 
 import Rails from "@rails/ujs"
-import Turbolinks from "turbolinks"
+import "@hotwired/turbo-rails"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import "stylesheets/application.scss"
 
 Rails.start()
-Turbolinks.start()
 ActiveStorage.start()
 
 import "controllers"
+
+document.addEventListener("turbo:before-visit", e => {
+  window.MiniProfilerContainer = document.querySelector('body > .profiler-results')
+  if(!e.defaultPrevented) window.MiniProfiler.pageTransition()
+})
+
+document.addEventListener("turbo:load", e => {
+  if(window.MiniProfilerContainer) {
+    document.body.appendChild(window.MiniProfilerContainer)
+  }
+})

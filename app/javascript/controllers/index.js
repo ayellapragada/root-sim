@@ -9,9 +9,10 @@ import consumer from '../channels/consumer'
 import controller from '../controllers/application_controller'
 
 const application = Application.start()
+application.consumer = consumer
 const context = require.context("controllers", true, /_controller\.js$/)
 application.load(definitionsFromContext(context))
-StimulusReflex.initialize(application, { consumer, controller, isolate: true })
+StimulusReflex.initialize(application, { controller, isolate: true })
 StimulusReflex.debug = process.env.RAILS_ENV === 'development'
 
 if (process.env.RAILS_ENV === 'development') {
