@@ -1,7 +1,6 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
-  config.session_store :cache_store
 
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -26,10 +25,14 @@ Rails.application.configure do
     config.public_file_server.headers = {
       'Cache-Control' => "public, max-age=#{2.days.to_i}"
     }
+    config.cache_store = :redis_cache_store, {driver: :hiredis, url: ENV.fetch('REDIS_URL') { 'redis://localhost:6379/1' }}
+    config.session_store :cache_store, key: '_session_development', compress: true, pool_size: 5, expire_after: 1.year
   else
+    # This app is using stimulus_reflex, this should never happen.
+    # Caching should be enable on development.
     config.action_controller.perform_caching = false
-
     config.cache_store = :null_store
+    config.session_store :cache_store
   end
 
   # Store uploaded files on the local file system (see config/storage.yml for options).

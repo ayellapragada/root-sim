@@ -16,7 +16,9 @@ gem 'webpacker', '~> 5.4.0'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbo-rails', '~> 0.7'
 # Use Redis adapter to run Action Cable in production
-gem 'redis', '~> 4.0'
+gem 'redis', '>= 4.0', require: ['redis', 'redis/connection/hiredis']
+# Native redis wrapper which is much faster
+gem 'hiredis'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
