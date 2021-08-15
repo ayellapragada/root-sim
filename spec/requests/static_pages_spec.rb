@@ -6,7 +6,7 @@ RSpec.describe "StaticPages", type: :request do
       get root_path
 
       expect(response).to have_http_status(200)
-      expect(response.body).to include('Welcome! Landing Page')
+      expect(response.body).to include('A slightly better way to learn how to play Root')
     end
 
     context 'when logged in' do
