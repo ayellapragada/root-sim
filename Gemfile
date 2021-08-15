@@ -29,6 +29,8 @@ gem 'devise'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  # Build factories in test suite
+  gem 'factory_bot_rails'
   # BDD Test Suite
   gem 'rspec-rails', '~> 5.0.0'
 end

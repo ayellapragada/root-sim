@@ -1,11 +1,23 @@
 require 'rails_helper'
 
 RSpec.describe "StaticPages", type: :request do
-  describe "GET /landing_page" do
-    it 'loads landing page'
+  describe "GET /welcome" do
+    it 'loads landing page' do
+      get root_path
+
+      expect(response).to have_http_status(200)
+      expect(response.body).to include('Welcome! Landing Page')
+    end
 
     context 'when logged in' do
-      it 'redirects to home page'
+      it 'redirects to home page' do
+        sign_in(create(:user))
+
+        get root_path
+
+        expect(response).to have_http_status(200)
+        expect(response.body).to include('Hello! Welcome.')
+      end
     end
   end
 end
