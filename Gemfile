@@ -44,6 +44,8 @@ group :development do
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  # Add the ability to unit test reflexes
+  gem 'stimulus_reflex_testing'
 end
 
 group :test do
