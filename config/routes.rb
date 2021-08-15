@@ -3,7 +3,9 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  root 'home#index'
-  get 'home/index'
-  get 'home/:id', to: 'home#show'
+  authenticated :user do
+    root to: 'home#index', as: :authenticated_root
+  end
+
+  root to: 'static_pages#welcome'
 end
